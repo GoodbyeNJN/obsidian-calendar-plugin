@@ -55,6 +55,8 @@
 
 <CalendarBase
   {sources}
+  showDots={$settings.showDots}
+  showBackground={$settings.showBackground}
   {today}
   {onHoverDay}
   {onHoverWeek}

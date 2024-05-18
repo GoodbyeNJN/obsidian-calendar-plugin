@@ -7,6 +7,8 @@ import { DEFAULT_WEEK_FORMAT, DEFAULT_WORDS_PER_DOT } from "src/constants";
 import type CalendarPlugin from "./main";
 
 export interface ISettings {
+  showBackground: boolean;
+  showDots: boolean;
   wordsPerDot: number;
   weekStart: IWeekStartOption;
   shouldConfirmBeforeCreate: boolean;
@@ -34,6 +36,8 @@ export const defaultSettings = Object.freeze({
   shouldConfirmBeforeCreate: true,
   weekStart: "locale" as IWeekStartOption,
 
+  showBackground: false,
+  showDots: true,
   wordsPerDot: DEFAULT_WORDS_PER_DOT,
 
   showWeeklyNote: false,
@@ -77,6 +81,8 @@ export class CalendarSettingsTab extends PluginSettingTab {
     this.containerEl.createEl("h3", {
       text: "General Settings",
     });
+    this.addShowBackgroundSetting();
+    this.addShowDotsSetting();
     this.addDotThresholdSetting();
     this.addWeekStartSetting();
     this.addConfirmCreateSetting();
@@ -103,6 +109,34 @@ export class CalendarSettingsTab extends PluginSettingTab {
       text: "Advanced Settings",
     });
     this.addLocaleOverrideSetting();
+  }
+
+  addShowBackgroundSetting(): void {
+    new Setting(this.containerEl)
+      .setName("Show background")
+      .setDesc("If enabled, dates with events will show background color.")
+      .addToggle((toggle) => {
+        toggle.setValue(this.plugin.options.showBackground);
+        toggle.onChange(async (value) => {
+          this.plugin.writeOptions(() => ({
+            showBackground: value,
+          }));
+        });
+      });
+  }
+
+  addShowDotsSetting(): void {
+    new Setting(this.containerEl)
+      .setName("Show dots")
+      .setDesc("If enabled, dates with events will show dots below them.")
+      .addToggle((toggle) => {
+        toggle.setValue(this.plugin.options.showDots);
+        toggle.onChange(async (value) => {
+          this.plugin.writeOptions(() => ({
+            showDots: value,
+          }));
+        });
+      });
   }
 
   addDotThresholdSetting(): void {
