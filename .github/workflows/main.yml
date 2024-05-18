@@ -2,21 +2,36 @@ name: CI
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    tags:
+      - "*.*.*"
 
 jobs:
-  lint-and-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Install modules
-        run: yarn
+      - name: Setup Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
 
-      - name: Lint
-        run: yarn run lint
+      - name: Install dependencies
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
 
-      - name: Run tests
-        run: yarn run test
+      - name: Run build
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            main.js
+            manifest.json
+            styles.css
