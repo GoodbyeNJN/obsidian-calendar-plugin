@@ -3202,9 +3202,9 @@ object.pick@^1.3.0:
   dependencies:
     isobject "^3.0.1"
 
-"obsidian-calendar-ui@https://github.com/GoodbyeNJN/obsidian-calendar-ui/releases/download/2024-05-18_01/obsidian-calendar-ui-v0.3.12.tgz":
+"obsidian-calendar-ui@https://github.com/GoodbyeNJN/obsidian-calendar-ui/releases/download/2024-05-18_01/v0.3.12.tgz":
   version "0.3.12"
-  resolved "https://github.com/GoodbyeNJN/obsidian-calendar-ui/releases/download/2024-05-18_01/obsidian-calendar-ui-v0.3.12.tgz#571c1ff8b45176dde9b21e33e8d94cf7f455f20a"
+  resolved "https://github.com/GoodbyeNJN/obsidian-calendar-ui/releases/download/2024-05-18_01/v0.3.12.tgz#278022897c8a520d005c7019edfc74b147dceaed"
   dependencies:
     obsidian-daily-notes-interface "0.8.4"
     svelte "3.35.0"
